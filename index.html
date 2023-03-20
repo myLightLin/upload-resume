@@ -1,50 +1,58 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文件上传 demo</title>
+</head>
+<body>
+  <form name="upload" method="POST" enctype="multipart/form-data" action="/upload">
+    <input type="file" name="myfile">
+    <input type="submit" name="submit" value="上传文件">
+  </form>
 
-<script src="uploader.js"></script>
-
-<form name="upload" method="POST" enctype="multipart/form-data" action="/upload">
-  <input type="file" name="myfile">
-  <input type="submit" name="submit" value="Upload (Resumes automatically)">
-</form>
-
-<button onclick="uploader.stop()">Stop upload</button>
+  <button onclick="uploader.stop()">停止上传</button>
 
 
-<div id="log">Progress indication</div>
+  <div id="log">上传进度条：</div>
 
-<script>
-  function log(html) {
-    document.getElementById('log').innerHTML = html;
-    console.log(html);
-  }
 
-  function onProgress(loaded, total) {
-    log("progress " + loaded + ' / ' + total);
-  }
-
-  let uploader;
-
-  document.forms.upload.onsubmit = async function(e) {
-    e.preventDefault();
-
-    let file = this.elements.myfile.files[0];
-    if (!file) return;
-
-    uploader = new Uploader({file, onProgress});
-
-    try {
-      let uploaded = await uploader.upload();
-
-      if (uploaded) {
-        log('success');
-      } else {
-        log('stopped');
-      }
-
-    } catch(err) {
-      console.error(err);
-      log('error');
+  <script src="uploader.js"></script>
+  <script>
+    function log(html) {
+      document.getElementById('log').innerHTML = html;
+      console.log(html);
     }
-  };
-
-</script>
+  
+    function onProgress(loaded, total) {
+      log("progress " + loaded + ' / ' + total);
+    }
+  
+    let uploader;
+  
+    document.forms.upload.onsubmit = async function(e) {
+      e.preventDefault();
+  
+      let file = this.elements.myfile.files[0];
+      if (!file) return;
+  
+      uploader = new Uploader({file, onProgress});
+  
+      try {
+        let uploaded = await uploader.upload();
+  
+        if (uploaded) {
+          log('success');
+        } else {
+          log('stopped');
+        }
+  
+      } catch(err) {
+        console.error(err);
+        log('error');
+      }
+    }
+  </script>
+</body>
+</html>
