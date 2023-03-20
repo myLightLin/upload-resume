@@ -1,0 +1,14 @@
+{
+  "name": "upload-resume",
+  "version": "1.0.0",
+  "description": "upload test",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^4.3.3",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "node-static": "^0.7.11",
+    "path": "^0.12.7"
+  }
+}
